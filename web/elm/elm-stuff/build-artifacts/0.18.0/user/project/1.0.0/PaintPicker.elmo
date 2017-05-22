@@ -1,2 +1,75 @@
+var _user$project$PaintPicker$paintSingle = function (paint) {
+	return A2(
+		_elm_lang$html$Html$li,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('paint available'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(paint.color),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$PaintPicker$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('paints'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$PaintPicker$paintSingle, model));
+};
+var _user$project$PaintPicker$init = {
+	ctor: '::',
+	_0: {color: 'salmon', sheen: 'gloss', picked: false},
+	_1: {
+		ctor: '::',
+		_0: {color: 'tomato', sheen: 'flat', picked: false},
+		_1: {
+			ctor: '::',
+			_0: {color: 'darkorange', sheen: 'satin', picked: false},
+			_1: {
+				ctor: '::',
+				_0: {color: 'indianred', sheen: 'gloss', picked: false},
+				_1: {
+					ctor: '::',
+					_0: {color: 'greenyellow', sheen: 'eggshell', picked: false},
+					_1: {
+						ctor: '::',
+						_0: {color: 'mediumspringgreen', sheen: 'eggshell', picked: false},
+						_1: {
+							ctor: '::',
+							_0: {color: 'khaki', sheen: 'flat', picked: false},
+							_1: {
+								ctor: '::',
+								_0: {color: 'gold', sheen: 'flat', picked: false},
+								_1: {
+									ctor: '::',
+									_0: {color: 'rosybrown', sheen: 'satin', picked: false},
+									_1: {
+										ctor: '::',
+										_0: {color: 'teal', sheen: 'semi-gloss', picked: false},
+										_1: {
+											ctor: '::',
+											_0: {color: 'maroon', sheen: 'semi-gloss', picked: false},
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$PaintPicker$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
-	_elm_lang$html$Html$text('Hello from Elm'));
+	_user$project$PaintPicker$view(_user$project$PaintPicker$init));
+var _user$project$PaintPicker$Paint = F3(
+	function (a, b, c) {
+		return {color: a, sheen: b, picked: c};
+	});
