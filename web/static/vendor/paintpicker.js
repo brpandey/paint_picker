@@ -8268,42 +8268,48 @@ var _user$project$PaintPicker$update = F2(
 				paint,
 				{picked: !paint.picked}) : paint;
 		};
-		return A2(_elm_lang$core$List$map, refreshPaint, model);
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_elm_lang$core$List$map, refreshPaint, model),
+			_1: _elm_lang$core$Platform_Cmd$none
+		};
 	});
-var _user$project$PaintPicker$init = {
-	ctor: '::',
-	_0: {cart: 1, color: 'salmon', sheen: 'gloss', picked: false},
-	_1: {
+var _user$project$PaintPicker$init = function () {
+	var paints = {
 		ctor: '::',
-		_0: {cart: 2, color: 'tomato', sheen: 'flat', picked: false},
+		_0: {cart: 1, color: 'salmon', sheen: 'gloss', picked: false},
 		_1: {
 			ctor: '::',
-			_0: {cart: 3, color: 'darkorange', sheen: 'satin', picked: false},
+			_0: {cart: 2, color: 'tomato', sheen: 'flat', picked: false},
 			_1: {
 				ctor: '::',
-				_0: {cart: 4, color: 'indianred', sheen: 'gloss', picked: false},
+				_0: {cart: 3, color: 'darkorange', sheen: 'satin', picked: false},
 				_1: {
 					ctor: '::',
-					_0: {cart: 5, color: 'greenyellow', sheen: 'eggshell', picked: false},
+					_0: {cart: 4, color: 'indianred', sheen: 'gloss', picked: false},
 					_1: {
 						ctor: '::',
-						_0: {cart: 6, color: 'mediumspringgreen', sheen: 'eggshell', picked: false},
+						_0: {cart: 5, color: 'greenyellow', sheen: 'eggshell', picked: false},
 						_1: {
 							ctor: '::',
-							_0: {cart: 7, color: 'khaki', sheen: 'flat', picked: false},
+							_0: {cart: 6, color: 'mediumspringgreen', sheen: 'eggshell', picked: false},
 							_1: {
 								ctor: '::',
-								_0: {cart: 8, color: 'gold', sheen: 'flat', picked: false},
+								_0: {cart: 7, color: 'khaki', sheen: 'flat', picked: false},
 								_1: {
 									ctor: '::',
-									_0: {cart: 9, color: 'rosybrown', sheen: 'satin', picked: false},
+									_0: {cart: 8, color: 'gold', sheen: 'flat', picked: false},
 									_1: {
 										ctor: '::',
-										_0: {cart: 10, color: 'teal', sheen: 'semi-gloss', picked: false},
+										_0: {cart: 9, color: 'rosybrown', sheen: 'satin', picked: false},
 										_1: {
 											ctor: '::',
-											_0: {cart: 11, color: 'maroon', sheen: 'semi-gloss', picked: false},
-											_1: {ctor: '[]'}
+											_0: {cart: 10, color: 'teal', sheen: 'semi-gloss', picked: false},
+											_1: {
+												ctor: '::',
+												_0: {cart: 11, color: 'maroon', sheen: 'semi-gloss', picked: false},
+												_1: {ctor: '[]'}
+											}
 										}
 									}
 								}
@@ -8313,8 +8319,9 @@ var _user$project$PaintPicker$init = {
 				}
 			}
 		}
-	}
-};
+	};
+	return {ctor: '_Tuple2', _0: paints, _1: _elm_lang$core$Platform_Cmd$none};
+}();
 var _user$project$PaintPicker$Paint = F4(
 	function (a, b, c, d) {
 		return {cart: a, color: b, sheen: c, picked: d};
@@ -8357,8 +8364,15 @@ var _user$project$PaintPicker$view = function (model) {
 		},
 		A2(_elm_lang$core$List$map, _user$project$PaintPicker$paintSingle, model));
 };
-var _user$project$PaintPicker$main = _elm_lang$html$Html$beginnerProgram(
-	{model: _user$project$PaintPicker$init, update: _user$project$PaintPicker$update, view: _user$project$PaintPicker$view})();
+var _user$project$PaintPicker$main = _elm_lang$html$Html$program(
+	{
+		init: _user$project$PaintPicker$init,
+		view: _user$project$PaintPicker$view,
+		update: _user$project$PaintPicker$update,
+		subscriptions: function (_p1) {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	})();
 
 var Elm = {};
 Elm['PaintPicker'] = Elm['PaintPicker'] || {};

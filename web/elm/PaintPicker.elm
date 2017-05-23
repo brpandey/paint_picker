@@ -5,12 +5,12 @@ import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 
 
-main : Program Never Model Msg
 main =
-    Html.beginnerProgram
-        { model = init
-        , update = update
+    Html.program
+        { init = init
         , view = view
+        , update = update
+        , subscriptions = (\_ -> Sub.none)
         }
 
 
@@ -37,20 +37,24 @@ type alias Model =
     List Paint
 
 
-init : Model
+init : ( Model, Cmd Msg )
 init =
-    [ { cart = 1, color = "salmon", sheen = "gloss", picked = False }
-    , { cart = 2, color = "tomato", sheen = "flat", picked = False }
-    , { cart = 3, color = "darkorange", sheen = "satin", picked = False }
-    , { cart = 4, color = "indianred", sheen = "gloss", picked = False }
-    , { cart = 5, color = "greenyellow", sheen = "eggshell", picked = False }
-    , { cart = 6, color = "mediumspringgreen", sheen = "eggshell", picked = False }
-    , { cart = 7, color = "khaki", sheen = "flat", picked = False }
-    , { cart = 8, color = "gold", sheen = "flat", picked = False }
-    , { cart = 9, color = "rosybrown", sheen = "satin", picked = False }
-    , { cart = 10, color = "teal", sheen = "semi-gloss", picked = False }
-    , { cart = 11, color = "maroon", sheen = "semi-gloss", picked = False }
-    ]
+    let
+        paints =
+            [ { cart = 1, color = "salmon", sheen = "gloss", picked = False }
+            , { cart = 2, color = "tomato", sheen = "flat", picked = False }
+            , { cart = 3, color = "darkorange", sheen = "satin", picked = False }
+            , { cart = 4, color = "indianred", sheen = "gloss", picked = False }
+            , { cart = 5, color = "greenyellow", sheen = "eggshell", picked = False }
+            , { cart = 6, color = "mediumspringgreen", sheen = "eggshell", picked = False }
+            , { cart = 7, color = "khaki", sheen = "flat", picked = False }
+            , { cart = 8, color = "gold", sheen = "flat", picked = False }
+            , { cart = 9, color = "rosybrown", sheen = "satin", picked = False }
+            , { cart = 10, color = "teal", sheen = "semi-gloss", picked = False }
+            , { cart = 11, color = "maroon", sheen = "semi-gloss", picked = False }
+            ]
+    in
+        ( paints, Cmd.none )
 
 
 
@@ -61,7 +65,7 @@ type Msg
     = Pick Paint
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
     case msg of
         Pick pickedPaint ->
@@ -74,7 +78,7 @@ update msg model =
                         paint
             in
                 -- apply to each model list paint
-                List.map refreshPaint model
+                ( List.map refreshPaint model, Cmd.none )
 
 
 
