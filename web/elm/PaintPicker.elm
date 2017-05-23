@@ -3,6 +3,8 @@ module PaintPicker exposing (..)
 import Html exposing (Html, ul, li, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
+import Json.Decode as Decode exposing (Decoder, field)
+import Http
 
 
 main =
@@ -39,22 +41,9 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    let
-        paints =
-            [ { cart = 1, color = "salmon", sheen = "gloss", picked = False }
-            , { cart = 2, color = "tomato", sheen = "flat", picked = False }
-            , { cart = 3, color = "darkorange", sheen = "satin", picked = False }
-            , { cart = 4, color = "indianred", sheen = "gloss", picked = False }
-            , { cart = 5, color = "greenyellow", sheen = "eggshell", picked = False }
-            , { cart = 6, color = "mediumspringgreen", sheen = "eggshell", picked = False }
-            , { cart = 7, color = "khaki", sheen = "flat", picked = False }
-            , { cart = 8, color = "gold", sheen = "flat", picked = False }
-            , { cart = 9, color = "rosybrown", sheen = "satin", picked = False }
-            , { cart = 10, color = "teal", sheen = "semi-gloss", picked = False }
-            , { cart = 11, color = "maroon", sheen = "semi-gloss", picked = False }
-            ]
-    in
-        ( paints, Cmd.none )
+    -- Fire off a Cmd to the Elm Runtime,
+    -- getPaints from the Paints HTTP API
+    ( [], getPaints )
 
 
 
@@ -63,6 +52,7 @@ init =
 
 type Msg
     = Pick Paint
+    | NewPaints (Result Http.Error (List Paint))
 
 
 update : Msg -> Model -> ( Model, Cmd msg )
@@ -79,6 +69,16 @@ update msg model =
             in
                 -- apply to each model list paint
                 ( List.map refreshPaint model, Cmd.none )
+
+        NewPaints (Ok seats) ->
+            ( seats, Cmd.none )
+
+        NewPaints (Err error) ->
+            let
+                _ =
+                    Debug.log "OOps!" error
+            in
+                ( model, Cmd.none )
 
 
 
@@ -101,3 +101,36 @@ paintSingle paint =
     in
         li [ class ("paint " ++ pickedClass), onClick (Pick paint) ]
             [ text (toString paint.cart ++ " " ++ paint.color) ]
+
+
+
+-- CMD
+
+
+paintsApiUrl : String
+paintsApiUrl =
+    "http://localhost:4000/api/paints"
+
+
+getPaints : Cmd Msg
+getPaints =
+    -- Wraps the Http request in a Command Msg
+    -- Cmd will be performed by Elm runtime (will go back to update eventually)
+    -- Note unlike Elixir, Elm pipes into the last-rightmost arg == partial functions
+    -- The Msg will be a list of already validated Paint records
+    (Decode.at [ "data" ] (Decode.list paintDecoder))
+        |> Http.get paintsApiUrl
+        |> Http.send NewPaints
+
+
+
+-- Validates and parses Json into Paint record
+
+
+paintDecoder : Decoder Paint
+paintDecoder =
+    Decode.map4 Paint
+        (field "cart" Decode.int)
+        (field "color" Decode.string)
+        (field "sheen" Decode.string)
+        (field "picked" Decode.bool)

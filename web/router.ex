@@ -20,7 +20,9 @@ defmodule PaintPicker.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PaintPicker do
-  #   pipe_through :api
-  # end
+  scope "/api", PaintPicker do
+    pipe_through :api
+
+    resources "/paints", PaintController, except: [:new, :edit]
+  end
 end
