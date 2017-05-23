@@ -43,7 +43,6 @@ h2.header {
 
 
 .available { background: white; }
-.occupied  { background: cyan; }
 
 
 .rosybrown { background: rosybrown; }
@@ -60,7 +59,7 @@ h2.header {
 .mediumspringgreen { background: mediumspringgreen; }
 .teal { background: teal; }
 .maroon { background: maroon; }
-
+.cyan { background: cyan; }
 
 
 .paint:nth-child(2n+1) { clear: both}

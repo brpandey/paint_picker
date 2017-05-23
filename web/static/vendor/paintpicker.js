@@ -8145,17 +8145,205 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
+var _user$project$PaintPicker$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		var refreshPaint = function (paint) {
+			return _elm_lang$core$Native_Utils.eq(paint.cart, _p0._0.cart) ? _elm_lang$core$Native_Utils.update(
+				paint,
+				{picked: !paint.picked}) : paint;
+		};
+		return A2(_elm_lang$core$List$map, refreshPaint, model);
+	});
+var _user$project$PaintPicker$init = {
+	ctor: '::',
+	_0: {cart: 1, color: 'salmon', sheen: 'gloss', picked: false},
+	_1: {
+		ctor: '::',
+		_0: {cart: 2, color: 'tomato', sheen: 'flat', picked: false},
+		_1: {
+			ctor: '::',
+			_0: {cart: 3, color: 'darkorange', sheen: 'satin', picked: false},
+			_1: {
+				ctor: '::',
+				_0: {cart: 4, color: 'indianred', sheen: 'gloss', picked: false},
+				_1: {
+					ctor: '::',
+					_0: {cart: 5, color: 'greenyellow', sheen: 'eggshell', picked: false},
+					_1: {
+						ctor: '::',
+						_0: {cart: 6, color: 'mediumspringgreen', sheen: 'eggshell', picked: false},
+						_1: {
+							ctor: '::',
+							_0: {cart: 7, color: 'khaki', sheen: 'flat', picked: false},
+							_1: {
+								ctor: '::',
+								_0: {cart: 8, color: 'gold', sheen: 'flat', picked: false},
+								_1: {
+									ctor: '::',
+									_0: {cart: 9, color: 'rosybrown', sheen: 'satin', picked: false},
+									_1: {
+										ctor: '::',
+										_0: {cart: 10, color: 'teal', sheen: 'semi-gloss', picked: false},
+										_1: {
+											ctor: '::',
+											_0: {cart: 11, color: 'maroon', sheen: 'semi-gloss', picked: false},
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$PaintPicker$Paint = F4(
+	function (a, b, c, d) {
+		return {cart: a, color: b, sheen: c, picked: d};
+	});
+var _user$project$PaintPicker$Pick = function (a) {
+	return {ctor: 'Pick', _0: a};
+};
 var _user$project$PaintPicker$paintSingle = function (paint) {
+	var pickedClass = paint.picked ? paint.color : 'available';
 	return A2(
 		_elm_lang$html$Html$li,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('paint available'),
-			_1: {ctor: '[]'}
+			_0: _elm_lang$html$Html_Attributes$class(
+				A2(_elm_lang$core$Basics_ops['++'], 'paint ', pickedClass)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$PaintPicker$Pick(paint)),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text(paint.color),
+			_0: _elm_lang$html$Html$text(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(paint.cart),
+					A2(_elm_lang$core$Basics_ops['++'], ' ', paint.color))),
 			_1: {ctor: '[]'}
 		});
 };
@@ -8169,57 +8357,8 @@ var _user$project$PaintPicker$view = function (model) {
 		},
 		A2(_elm_lang$core$List$map, _user$project$PaintPicker$paintSingle, model));
 };
-var _user$project$PaintPicker$init = {
-	ctor: '::',
-	_0: {color: 'salmon', sheen: 'gloss', picked: false},
-	_1: {
-		ctor: '::',
-		_0: {color: 'tomato', sheen: 'flat', picked: false},
-		_1: {
-			ctor: '::',
-			_0: {color: 'darkorange', sheen: 'satin', picked: false},
-			_1: {
-				ctor: '::',
-				_0: {color: 'indianred', sheen: 'gloss', picked: false},
-				_1: {
-					ctor: '::',
-					_0: {color: 'greenyellow', sheen: 'eggshell', picked: false},
-					_1: {
-						ctor: '::',
-						_0: {color: 'mediumspringgreen', sheen: 'eggshell', picked: false},
-						_1: {
-							ctor: '::',
-							_0: {color: 'khaki', sheen: 'flat', picked: false},
-							_1: {
-								ctor: '::',
-								_0: {color: 'gold', sheen: 'flat', picked: false},
-								_1: {
-									ctor: '::',
-									_0: {color: 'rosybrown', sheen: 'satin', picked: false},
-									_1: {
-										ctor: '::',
-										_0: {color: 'teal', sheen: 'semi-gloss', picked: false},
-										_1: {
-											ctor: '::',
-											_0: {color: 'maroon', sheen: 'semi-gloss', picked: false},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-};
-var _user$project$PaintPicker$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
-	_user$project$PaintPicker$view(_user$project$PaintPicker$init));
-var _user$project$PaintPicker$Paint = F3(
-	function (a, b, c) {
-		return {color: a, sheen: b, picked: c};
-	});
+var _user$project$PaintPicker$main = _elm_lang$html$Html$beginnerProgram(
+	{model: _user$project$PaintPicker$init, update: _user$project$PaintPicker$update, view: _user$project$PaintPicker$view})();
 
 var Elm = {};
 Elm['PaintPicker'] = Elm['PaintPicker'] || {};

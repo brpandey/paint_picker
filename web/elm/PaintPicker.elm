@@ -2,11 +2,16 @@ module PaintPicker exposing (..)
 
 import Html exposing (Html, ul, li, text)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
 
 
-main : Html String
+main : Program Never Model Msg
 main =
-    view init
+    Html.beginnerProgram
+        { model = init
+        , update = update
+        , view = view
+        }
 
 
 
@@ -17,7 +22,8 @@ main =
 
 
 type alias Paint =
-    { color : String
+    { cart : Int
+    , color : String
     , sheen : String
     , picked : Bool
     }
@@ -33,29 +39,61 @@ type alias Model =
 
 init : Model
 init =
-    [ { color = "salmon", sheen = "gloss", picked = False }
-    , { color = "tomato", sheen = "flat", picked = False }
-    , { color = "darkorange", sheen = "satin", picked = False }
-    , { color = "indianred", sheen = "gloss", picked = False }
-    , { color = "greenyellow", sheen = "eggshell", picked = False }
-    , { color = "mediumspringgreen", sheen = "eggshell", picked = False }
-    , { color = "khaki", sheen = "flat", picked = False }
-    , { color = "gold", sheen = "flat", picked = False }
-    , { color = "rosybrown", sheen = "satin", picked = False }
-    , { color = "teal", sheen = "semi-gloss", picked = False }
-    , { color = "maroon", sheen = "semi-gloss", picked = False }
+    [ { cart = 1, color = "salmon", sheen = "gloss", picked = False }
+    , { cart = 2, color = "tomato", sheen = "flat", picked = False }
+    , { cart = 3, color = "darkorange", sheen = "satin", picked = False }
+    , { cart = 4, color = "indianred", sheen = "gloss", picked = False }
+    , { cart = 5, color = "greenyellow", sheen = "eggshell", picked = False }
+    , { cart = 6, color = "mediumspringgreen", sheen = "eggshell", picked = False }
+    , { cart = 7, color = "khaki", sheen = "flat", picked = False }
+    , { cart = 8, color = "gold", sheen = "flat", picked = False }
+    , { cart = 9, color = "rosybrown", sheen = "satin", picked = False }
+    , { cart = 10, color = "teal", sheen = "semi-gloss", picked = False }
+    , { cart = 11, color = "maroon", sheen = "semi-gloss", picked = False }
     ]
+
+
+
+-- UPDATE (let's add some interactivity so we can update our model!)
+
+
+type Msg
+    = Pick Paint
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        Pick pickedPaint ->
+            -- if we pick it once, its picked, twice, not picked
+            let
+                refreshPaint paint =
+                    if paint.cart == pickedPaint.cart then
+                        { paint | picked = not paint.picked }
+                    else
+                        paint
+            in
+                -- apply to each model list paint
+                List.map refreshPaint model
 
 
 
 -- VIEW
 
 
-view : Model -> Html String
+view : Model -> Html Msg
 view model =
     ul [ class "paints" ] (List.map paintSingle model)
 
 
-paintSingle : Paint -> Html String
+paintSingle : Paint -> Html Msg
 paintSingle paint =
-    li [ class "paint available" ] [ text paint.color ]
+    let
+        pickedClass =
+            if paint.picked then
+                paint.color
+            else
+                "available"
+    in
+        li [ class ("paint " ++ pickedClass), onClick (Pick paint) ]
+            [ text (toString paint.cart ++ " " ++ paint.color) ]
