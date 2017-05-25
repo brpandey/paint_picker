@@ -11,12 +11,38 @@ Sidenote:
 
 Really impressed with Elm and the virtual DOM construction, separation of purity and impurity 
 (handled by Elm runtime).
-Happy that the Elm folks replaced Signals, Mailboxes with Cmd, Sub
+Happy that the Elm folks replaced things like Signals, Mailboxes for Cmd, Sub
+
+
+###Snippets
+
+Here's some Phoenix code snippets (router and controller)
+
+```elixir
+
+  # Other scopes may use custom stacks.
+  scope "/api", PaintPicker do
+    pipe_through :api
+
+    resources "/paints", PaintController, except: [:new, :edit]
+  end
+
+```
+
+
+```elixir
+
+  def index(conn, _params) do
+    paints = Repo.all(Paint)
+    render(conn, "index.json", paints: paints)
+  end
+
+```
 
 
 Here's the JSON fetch code
 
-```elixir
+```haskell
 
         getPaints : Cmd Msg
         getPaints =
