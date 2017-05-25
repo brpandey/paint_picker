@@ -70,8 +70,8 @@ update msg model =
                 -- apply to each model list paint
                 ( List.map refreshPaint model, Cmd.none )
 
-        NewPaints (Ok seats) ->
-            ( seats, Cmd.none )
+        NewPaints (Ok paints) ->
+            ( paints, Cmd.none )
 
         NewPaints (Err error) ->
             let
