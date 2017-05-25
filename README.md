@@ -14,7 +14,7 @@ Really impressed with Elm and the virtual DOM construction, separation of purity
 Happy that the Elm folks replaced things like Signals, Mailboxes for Cmd, Sub
 
 
-###Snippets
+### Snippets
 
 Here's some Phoenix code snippets (router and controller)
 
