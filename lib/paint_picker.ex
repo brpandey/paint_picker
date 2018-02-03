@@ -11,7 +11,7 @@ defmodule PaintPicker do
       # Start the Ecto repository
       supervisor(PaintPicker.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(PaintPicker.Endpoint, []),
+      supervisor(PaintPicker.Endpoint, [])
       # Start your own worker by calling: PaintPicker.Worker.start_link(arg1, arg2, arg3)
       # worker(PaintPicker.Worker, [arg1, arg2, arg3]),
     ]

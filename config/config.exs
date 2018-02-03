@@ -6,16 +6,14 @@
 use Mix.Config
 
 # General application configuration
-config :paint_picker,
-  ecto_repos: [PaintPicker.Repo]
+config :paint_picker, ecto_repos: [PaintPicker.Repo]
 
 # Configures the endpoint
 config :paint_picker, PaintPicker.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "2RCwTdFHB5L0ZywrhaXbBvbCc5UhtZ/NcyNaCtC2aKxPYK0Yah4SVzb7IDpMdZgq",
   render_errors: [view: PaintPicker.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PaintPicker.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: PaintPicker.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -24,4 +22,4 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
